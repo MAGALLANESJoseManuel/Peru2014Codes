@@ -1,6 +1,6 @@
 
 # PARTE 1 CAMBIOS EN EL TIEMPO
-# Ejemplos tomados del libro "VISUALIZE THIS" de Nathan Yau 
+# Ejemplo tomado del libro "VISUALIZE THIS" de Nathan Yau 
 # Las anotaciones y modificaciones son del Prof. José Manuel Magallanes
 
 
