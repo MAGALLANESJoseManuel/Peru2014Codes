@@ -40,13 +40,26 @@ lines(lowess(datosDeTrabajo$Value~rango), col="red") # lowess line (x,y)
 etiquetaX = "Año"
 etiquetaY = "Tasa de Desempleo"
 titulo = "Tasa de desempleo en EUA, 1948 - 2010"
+subtitulo= "detectando tendencias"
 fechas = datosDeTrabajo$Year
+
 plot(rango, datosDeTrabajo$Value, xaxt="n",col = "gray", main=titulo,ylim=c(0,11),ylab=etiquetaY,xlab=etiquetaX,type="l")
 valsX=seq(1,746,12)
 valsyear=seq(1948,2010)
 axis(1, at=valsX, labels=valsyear,tck=0,las=2,lwd=0,cex.axis=0.5)
 abline(lm(datosDeTrabajo$Value~rango),col='blue',lwd=3,lty=3)
 lines(lowess(datosDeTrabajo$Value~rango), col="red",lwd=4) 
+legend("topleft",c('observado','lineal','loess'),lty=c(1,1,1),col=c('gray','blue',"red"))
+
+## otra alternativa
+plot(rango, datosDeTrabajo$Value,xaxt="n",col = "gray", ylim=c(0,11),type="l",ylab="",xlab="")
+valsX=seq(1,746,12)
+valsyear=seq(1948,2010)
+axis(1, at=valsX, labels=valsyear,tck=0,las=2,lwd=0,cex.axis=0.5)
+abline(lm(datosDeTrabajo$Value~rango),col='blue',lwd=3,lty=3)
+lines(lowess(datosDeTrabajo$Value~rango), col="red",lwd=4) 
+title(main=titulo,sub=subtitulo,xlab=etiquetaX,ylab=etiquetaY)
+
 
 # quieres trabajar sobre una serie de tiempo?
 tasa <- ts(datosDeTrabajo$Value, start=c(1948, 1), frequency=12) 
