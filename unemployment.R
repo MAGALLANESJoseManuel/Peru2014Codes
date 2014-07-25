@@ -5,8 +5,14 @@
 ### Paso 1: Cargando la data
 ### La data está en el website de Nathan, pero como tenemos el link no necesitamos descargarla en la computadora
 
-linkDeData = "http://datasets.flowingdata.com/datosDeTrabajo-rate-1948-2010.csv"
+## otra alternativa
+# library(RCurl)
+# linkDeData <- getURL("https://raw.githubusercontent.com/MAGALLANESJoseManuel/Peru2014Codes/master/unemploymentData.csv")
+# datosDeTrabajo<-read.csv(text = linkDeData, header=TRUE)
+
+linkDeData = "http://datasets.flowingdata.com/unemployment-rate-1948-2010.csv"
 datosDeTrabajo<-read.csv(linkDeData, sep=",", header=TRUE)
+
 
 ### Paso 2: Familiarizandose con lo que se tiene
 ### recomiendo darle na mirada breve a la cabecera y cola del archivo, asi como ver  el nombre de las variables
@@ -15,15 +21,35 @@ tail (datosDeTrabajo)
 names (datosDeTrabajo)
 
 
-# Simple
-rango=(1:nrow(datosDeTrabajo))
-plot(rango, datosDeTrabajo$Value, col="gray")
+### Paso 3: Visualización Básica
+### uso mas simple del comando, lo que se obtenga muestra la gráfica con los valores por defecto
 
-# Anadiendo linea de tendencia
-abline(lm(datosDeTrabajo$Value~rango),col='blue',lwd = 3,lty=3)
+rango=(1:nrow(datosDeTrabajo))
+plot(rango, datosDeTrabajo$Value)
+
+### Paso 3: Visualización de Tendencia
+
+### Anadiendo linea de tendencia
+abline(lm(datosDeTrabajo$Value~rango),col='blue')
 
 # Anadiendo linea loess
-lines(lowess(datosDeTrabajo$Value~rango), col="red",lwd = 3) # lowess line (x,y)
+lines(lowess(datosDeTrabajo$Value~rango), col="red") # lowess line (x,y)
+
+### Paso 4: Retoques
+etiquetaX = "Año"
+etiquetaY = "Tasa de Desempleo"
+titulo = "tasa de desempleo en EUA, 1948 - 2010"
+fechas = datosDeTrabajo$Year
+plot(rango, datosDeTrabajo$Value, xaxt="n",col = "gray", main=titulo,ylim=c(0,11),ylab=etiquetaY,type="l")
+valsX=seq(1,746,12)
+valsyear=seq(1948,2010)
+axis(1, at=valsX, labels=valsyear,tck=0,las=2,lwd=0,cex.axis=0.5)
+abline(lm(datosDeTrabajo$Value~rango),col='blue',lwd=3,lty=3)
+lines(lowess(datosDeTrabajo$Value~rango), col="red",lwd=4) 
+
+# quieres trabajar sobre una serie de tiempo?
+tasa <- ts(datosDeTrabajo$Value, start=c(1948, 1), frequency=12) 
+plot.ts(tasa,main=titulo)
 
 
 
