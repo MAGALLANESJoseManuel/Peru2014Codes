@@ -52,13 +52,16 @@ lines(lowess(datosDeTrabajo$Value~rango), col="red",lwd=4)
 legend("topleft",inset=0.8,c('observado','lineal','loess'),lty=c(1,1,1),col=c('gray','blue',"red"),cex=0.8,lwd=2)
 
 ## otra alternativa
+encabezado=paste(titulo,"\n",subtitulo)
 plot(rango, datosDeTrabajo$Value,xaxt="n",col = "gray", ylim=c(0,11),type="l",ylab="",xlab="")
 valsX=seq(1,746,12)
 valsyear=seq(1948,2010)
 axis(1, at=valsX, labels=valsyear,tck=0,las=2,lwd=0,cex.axis=0.5)
 abline(lm(datosDeTrabajo$Value~rango),col='blue',lwd=3,lty=3)
 lines(lowess(datosDeTrabajo$Value~rango), col="red",lwd=4) 
-title(main=titulo,sub=subtitulo,xlab=etiquetaX,ylab=etiquetaY)
+title(main=encabezado,xlab=etiquetaX,ylab=etiquetaY)
+legend("topleft",inset=0.8,c('observado','lineal','loess'),lty=c(1,1,1),col=c('gray','blue',"red"),cex=0.8,lwd=2)
+
 
 
 # quieres trabajar sobre una serie de tiempo?
