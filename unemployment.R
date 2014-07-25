@@ -36,11 +36,12 @@ abline(lm(datosDeTrabajo$Value~rango),col='blue')
 lines(lowess(datosDeTrabajo$Value~rango), col="red") # lowess line (x,y)
 
 ### Paso 4: Retoques
+
 etiquetaX = "Año"
 etiquetaY = "Tasa de Desempleo"
-titulo = "tasa de desempleo en EUA, 1948 - 2010"
+titulo = "Tasa de desempleo en EUA, 1948 - 2010"
 fechas = datosDeTrabajo$Year
-plot(rango, datosDeTrabajo$Value, xaxt="n",col = "gray", main=titulo,ylim=c(0,11),ylab=etiquetaY,type="l")
+plot(rango, datosDeTrabajo$Value, xaxt="n",col = "gray", main=titulo,ylim=c(0,11),ylab=etiquetaY,xlab=etiquetaX,type="l")
 valsX=seq(1,746,12)
 valsyear=seq(1948,2010)
 axis(1, at=valsX, labels=valsyear,tck=0,las=2,lwd=0,cex.axis=0.5)
