@@ -43,13 +43,13 @@ titulo = "Tasa de desempleo en EUA, 1948 - 2010"
 subtitulo= "detectando tendencias"
 fechas = datosDeTrabajo$Year
 
-plot(rango, datosDeTrabajo$Value, xaxt="n",col = "gray", main=titulo,ylim=c(0,11),ylab=etiquetaY,xlab=etiquetaX,type="l")
+plot(rango, datosDeTrabajo$Value, xaxt="n",col = "darkgray", main=titulo,ylim=c(0,11),ylab=etiquetaY,xlab=etiquetaX,type="l")
 valsX=seq(1,746,12)
 valsyear=seq(1948,2010)
 axis(1, at=valsX, labels=valsyear,tck=0,las=2,lwd=0,cex.axis=0.5)
 abline(lm(datosDeTrabajo$Value~rango),col='blue',lwd=3,lty=3)
 lines(lowess(datosDeTrabajo$Value~rango), col="red",lwd=4) 
-legend("topleft",c('observado','lineal','loess'),lty=c(1,1,1),col=c('gray','blue',"red"))
+legend("topleft",inset=0.8,c('observado','lineal','loess'),lty=c(1,1,1),col=c('gray','blue',"red"),cex=0.8,lwd=2)
 
 ## otra alternativa
 plot(rango, datosDeTrabajo$Value,xaxt="n",col = "gray", ylim=c(0,11),type="l",ylab="",xlab="")
