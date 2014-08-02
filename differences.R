@@ -1,3 +1,4 @@
+rm(list=ls(all=TRUE)) #borrar todo
 # PARTE 1 MAS CAMBIOS Y DIFERENCIAS
 # Ejemplo tomado del libro "VISUALIZE THIS" de Nathan Yau 
 # Las anotaciones y modificaciones son del Prof. José Manuel Magallanes
@@ -11,7 +12,6 @@ datosDeTrabajo<-read.csv(linkDeData, sep=",", header=TRUE)
 ### Paso 2: Familiarizandose con lo que se tiene
 ### recomiendo darle na mirada breve a la cabecera y cola del archivo, asi como ver  el nombre de las variables
 head (datosDeTrabajo)
-tail (datosDeTrabajo)
 names (datosDeTrabajo)
 
 ### Paso 3: Alternativas para multivariables
@@ -34,7 +34,7 @@ stars(datosDeTrabajo, flip.labels=FALSE, key.loc = c(15, 1.5), draw.segments=TRU
 
 
 #### B) Heatmap
-
+datosDeTrabajoMX=as.matrix(datosDeTrabajo)
 heatmap(datosDeTrabajoMX)
 heatmap(datosDeTrabajoMX, margins=c(12,10),scale="column")
 
@@ -64,8 +64,6 @@ parallelplot(datosDeTrabajo[,c(-1)], horizontal.axis=FALSE, col="black")
 # tercer cuartil?
 
 limite=quantile(datosDeTrabajo$murder,0.75)[[1]]
-
-# Color by reading SAT
 misColores <- c()
 for (i in 1:nrow(datosDeTrabajo)) {
 	

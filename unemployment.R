@@ -1,3 +1,4 @@
+rm(list=ls(all=TRUE)) #borrar todo
 # PARTE 1 CAMBIOS EN EL TIEMPO
 # Ejemplo tomado del libro "VISUALIZE THIS" de Nathan Yau 
 # Las anotaciones y modificaciones son del Prof. José Manuel Magallanes
@@ -17,7 +18,6 @@ datosDeTrabajo<-read.csv(linkDeData, sep=",", header=TRUE)
 ### Paso 2: Familiarizandose con lo que se tiene
 ### recomiendo darle na mirada breve a la cabecera y cola del archivo, asi como ver  el nombre de las variables
 head (datosDeTrabajo)
-tail (datosDeTrabajo)
 names (datosDeTrabajo)
 
 
@@ -51,7 +51,7 @@ abline(lm(datosDeTrabajo$Value~rango),col='blue',lwd=3,lty=3)
 lines(lowess(datosDeTrabajo$Value~rango), col="red",lwd=4) 
 legend("topleft",inset=0.8,c('observado','lineal','loess'),lty=c(1,1,1),col=c('gray','blue',"red"),cex=0.8,lwd=2)
 
-## otra alternativa
+## con el subtitulo
 encabezado=paste(titulo,"\n",subtitulo)
 plot(rango, datosDeTrabajo$Value,xaxt="n",col = "gray", ylim=c(0,11),type="l",ylab="",xlab="")
 valsX=seq(1,746,12)
@@ -67,6 +67,3 @@ legend("topleft",inset=0.8,c('observado','lineal','loess'),lty=c(1,1,1),col=c('g
 # quieres trabajar sobre una serie de tiempo?
 tasa <- ts(datosDeTrabajo$Value, start=c(1948, 1), frequency=12) 
 plot.ts(tasa,main=titulo)
-
-
-

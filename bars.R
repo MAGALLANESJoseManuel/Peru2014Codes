@@ -1,4 +1,4 @@
-
+rm(list=ls(all=TRUE)) #borrar todo
 # PARTE 1 CAMBIOS EN EL TIEMPO
 # Ejemplo tomado del libro "VISUALIZE THIS" de Nathan Yau 
 # Las anotaciones y modificaciones son del Prof. José Manuel Magallanes
@@ -13,7 +13,6 @@ datosDeTrabajo<-read.csv(linkDeData, sep=",", header=TRUE)
 ### Paso 2: Familiarizandose con lo que se tiene
 ### recomiendo darle na mirada breve a la cabecera y cola del archivo, asi como ver  el nombre de las variables
 head (datosDeTrabajo)
-tail (datosDeTrabajo)
 names (datosDeTrabajo)
 
 ### Paso 3: Visualización Básica

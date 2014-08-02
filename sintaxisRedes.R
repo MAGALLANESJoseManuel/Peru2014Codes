@@ -1,31 +1,19 @@
 rm(list=ls(all=TRUE))
 
+# SUBIENDO LOS DATOS
 require(xlsx)
 data=read.xlsx("casoFigueroa.xls", sheetIndex = 1,startRow=2,header=F)
-data[,1] = gsub(" ", "_", data[,1])
+data[,1] = gsub(" ", "_", data[,1]) #ELIMINO ESPACIOS ENTRE APELLIDOS
 
+values=data[,c(-1,-ncol(data))] #matriz de adjacencia
+nombres=data[,1] #apellidos
 
-values=data[,c(-1,-ncol(data))]
+atributo=data[,c(1,ncol(data))] # es o no multinacional
+names(atributo)=c("nombre","multinacional") #nombre al atributo
 
-ei=c()
-
-for (i in 1:nrow(data)){
-  Unos=apply(values[i,],1,sum)[[1]]  
-  Ceros=ncol(values)-Unos
-  if (atributo[i,2] == 0){
-    ei[i]=(Ceros-Unos)/ncol(values)
-  } else{
-    ei[i]=(Unos-Ceros)/ncol(values)
-  }
-}
-ei
-nombres=data[,1]
-atributo=data[,c(1,ncol(data))]
-names(atributo)=c("nombre","multinacional")
 str(values)
 v=as.matrix(values,37,37)
 rownames(v)=colnames(v)=nombres
-
 
 library(igraph)
 g <- graph.adjacency(v)
@@ -41,25 +29,12 @@ plot(g,layout=layout.kamada.kawai)
 plot(g,layout=layout.fruchterman.reingold)
 plot(g,layout=layout.fruchterman.reingold,vertex.size=as.numeric(betweenness(g)))
 
-minC <- rep(-Inf, vcount(g))
-maxC <- rep(Inf, vcount(g))
-minC[1] <- maxC[1] <- 0
-co <- layout.fruchterman.reingold(g, minx=minC, maxx=maxC,
-                                  miny=minC, maxy=maxC,coolexp=5)
-plot(g,layout=co,vertex.size=as.numeric(betweenness(g)/2))
+# para gephi
 write.graph(g, "casoFigueroa.gml", format = "gml")
 
 
-r <- graph.ring(10)
-r <- add.edges(r, c(1,2, 2,3, 1,3))
-r= as.undirected(r, mode = c("collapse"))
-graph.coreness(r) 
-get.edgelist(r)
-betweenness(r)
-edge.betweenness(r)
-plot(r,layout=layout.fruchterman.reingold,vertex.size=as.numeric(betweenness(r)*5))
 
-
+# otro ejemplo (data de UCINET)
 # library(RCurl)
 # library(igraph)
 # REDES1 <- getURL("https://docs.google.com/spreadsheet/pub?key=0AhVqDdZgThPldFBiT09pMHZZSHJhd2ZRaTEtaGpaMVE&single=true&gid=0&output=csv")
